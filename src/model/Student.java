@@ -1,5 +1,7 @@
 package model;
 
+import constants.AppConstants;
+
 import java.time.LocalDate;
 
 public class Student extends Person{
@@ -31,6 +33,9 @@ public class Student extends Person{
     }
 
     public void setUni(String uni) {
+        if(uni == null || uni.trim().isEmpty() || uni.length() > AppConstants.UNI_NAME_MAX_LENGTH) {
+            throw new IllegalArgumentException("Invalid uni");
+        }
         this.uni = uni;
     }
 
@@ -39,6 +44,9 @@ public class Student extends Person{
     }
 
     public void setYear(int year) {
+        if(year < AppConstants.MIN_START_YEAR) {
+            throw new IllegalArgumentException("Invalid year");
+        }
         this.year = year;
     }
 
@@ -47,6 +55,9 @@ public class Student extends Person{
     }
 
     public void setGpa(double gpa) {
+        if(gpa < AppConstants.MIN_GPA || gpa > AppConstants.MAX_GPA) {
+            throw new IllegalArgumentException("Invalid gpa");
+        }
         this.gpa = gpa;
     }
 
