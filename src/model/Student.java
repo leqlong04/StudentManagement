@@ -1,34 +1,42 @@
 package model;
 
 import constants.AppConstants;
+import enums.AcademicPerformance;
 
 import java.time.LocalDate;
 
 public class Student extends Person{
-    private int studentId;
+    private static int idCount =1 ;
+    private String studentId;
     private String uni;
     private int year;
     private double gpa;
-
-    public Student(int id, String name, LocalDate dayOfBirth, String address,
-                   double height, double weight, int studentId,
-                   String uni, int year, double gpa) {
-        super(id, name, dayOfBirth, address, height, weight);
-        this.studentId = studentId;
-        this.uni = uni;
-        this.year = year;
-        this.gpa = gpa;
+    private AcademicPerformance perfor;
+    public Student(String name, LocalDate dayOfBirth, String address,
+                   Double height, Double weight, String uni, int year, Double gpa) {
+        super(name, dayOfBirth, address, height, weight);
+        this.studentId = generateStudentId();
+        setUni(uni);
+        setYear(year);
+        setGpa(gpa);
     }
 
-    public int getStudentId() {
+    private String generateStudentId() {
+        return String.format("SID%07d", idCount++);
+
+    }
+    public String getStudentId()
+    {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId)
+    {
         this.studentId = studentId;
     }
 
-    public String getUni() {
+    public String getUni()
+    {
         return uni;
     }
 
@@ -50,15 +58,16 @@ public class Student extends Person{
         this.year = year;
     }
 
-    public double getGpa() {
+    public Double getGpa() {
         return gpa;
     }
 
-    public void setGpa(double gpa) {
+    public void setGpa(Double gpa) {
         if(gpa < AppConstants.MIN_GPA || gpa > AppConstants.MAX_GPA) {
             throw new IllegalArgumentException("Invalid gpa");
         }
         this.gpa = gpa;
+        this.perfor = AcademicPerformance.fromGPA(gpa);
     }
 
     @Override
@@ -68,6 +77,7 @@ public class Student extends Person{
                 ", uni='" + uni + '\'' +
                 ", year=" + year +
                 ", gpa=" + gpa +
+                ", perfor=" + perfor +
                 '}';
     }
 }

@@ -48,8 +48,6 @@ public class StudentService {
             }
         }
 
-
-
     }
     public static void deleteStudent(int id) {
       Student s = findStudentById(id);

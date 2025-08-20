@@ -16,7 +16,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(int id, String name, LocalDate dayOfBirth, String address, double height, double weight) {
+    public Person(String name, LocalDate dayOfBirth, String address, double height, double weight) {
         this.id = idCount++;
         setName(name);
         setDayOfBirth(dayOfBirth);
@@ -30,7 +30,7 @@ public class Person {
     }
 
     public void setName(String name) {
-        if(name==null||name.trim().isEmpty()||name.length() > AppConstants.NAME_MAX_LENGTH){
+        if(name==null || name.trim().isEmpty() || name.length() > AppConstants.NAME_MAX_LENGTH){
             throw new IllegalArgumentException("Invalid name");
         }
         this.name = name;
@@ -68,22 +68,22 @@ public class Person {
 
 
 
-    public double getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
-        if(height<AppConstants.MIN_HEIGHT || height>AppConstants.MAX_HEIGHT){
+    public void setHeight(Double height) {
+        if(height < AppConstants.MIN_HEIGHT || height>AppConstants.MAX_HEIGHT){
             throw new IllegalArgumentException("Invalid height");
         }
         this.height = height;
     }
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(Double weight) {
         if(weight<AppConstants.MIN_WEIGHT || weight>AppConstants.MAX_WEIGHT){
             throw new IllegalArgumentException("Invalid weight");
         }
